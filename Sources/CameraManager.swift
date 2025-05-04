@@ -451,7 +451,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
      Zoom in to the requested scale.
      */
     open func zoom(_ scale: CGFloat) {
-        _zoom(scale)
+        _zoom(scale, true)
     }
 
     public var currentZoomScale: CGFloat {
@@ -984,7 +984,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
 
     public var onZoomChanged: ((CGFloat) -> Void)?
     
-    fileprivate func _zoom(_ scale: CGFloat) {
+    fileprivate func _zoom(_ scale: CGFloat, direct: Bool = false) {
         let device: AVCaptureDevice?
         
         switch cameraDevice {
@@ -998,7 +998,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
             let captureDevice = device
             try captureDevice?.lockForConfiguration()
             
-            zoomScale = max(1.0, min(scale, maxZoomScale))
+            zoomScale = direct ? max(1.0, min(scale, maxZoomScale)) : max(1.0, min(beginZoomScale * scale, maxZoomScale))
             onZoomChanged?(zoomScale)
             
             captureDevice?.videoZoomFactor = zoomScale
