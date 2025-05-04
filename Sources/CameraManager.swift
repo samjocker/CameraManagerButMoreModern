@@ -998,7 +998,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
             let captureDevice = device
             try captureDevice?.lockForConfiguration()
             
-            zoomScale = max(1.0, min(beginZoomScale * scale, maxZoomScale))
+            zoomScale = max(1.0, min(scale, maxZoomScale))
             onZoomChanged?(zoomScale)
             
             captureDevice?.videoZoomFactor = zoomScale
