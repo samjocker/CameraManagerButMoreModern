@@ -451,7 +451,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
      Zoom in to the requested scale.
      */
     open func zoom(_ scale: CGFloat) {
-        _zoom(scale, true)
+        _zoom(scale, direct: true)
     }
 
     public var currentZoomScale: CGFloat {
