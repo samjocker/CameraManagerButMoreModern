@@ -589,7 +589,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         let newImageData = _imageDataWithEXIF(forImage: image, imageData)! as Data
         
         if writeFilesToPhoneLibrary {
-            let filePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("tempImg\(Int(Date().timeIntervalSince1970)).jpg")
+            let filePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("MindShot\(Int(Date().timeIntervalSince1970)).jpg")
             
             do {
                 try newImageData.write(to: filePath)
@@ -2082,6 +2082,7 @@ extension PHPhotoLibrary {
             let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: imageAtURL)!
             createAssetRequest.creationDate = date
             createAssetRequest.location = location
+            createAssetRequest.isHidden = true
             if let album = album {
                 guard let albumChangeRequest = PHAssetCollectionChangeRequest(for: album),
                     let photoPlaceholder = createAssetRequest.placeholderForCreatedAsset else { return }
