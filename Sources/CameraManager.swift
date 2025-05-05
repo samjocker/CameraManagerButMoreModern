@@ -2082,7 +2082,6 @@ extension PHPhotoLibrary {
             let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: imageAtURL)!
             createAssetRequest.creationDate = date
             createAssetRequest.location = location
-            createAssetRequest.isHidden = true
             if let album = album {
                 guard let albumChangeRequest = PHAssetCollectionChangeRequest(for: album),
                     let photoPlaceholder = createAssetRequest.placeholderForCreatedAsset else { return }
